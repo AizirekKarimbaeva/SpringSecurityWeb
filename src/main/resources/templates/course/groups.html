@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table class="table">
+    <thead>
+    <tr >
+        <th scope="col">1</th>
+        <th scope="col">Group name</th>
+        <th scope="col">Date of start</th>
+        <th scope="col">Date of finish</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="group:${groups}">
+        <td th:field="${group.id}"></td>
+        <td th:text="${group.groupName}"></td>
+        <td th:text="${group.dateOfStart}"></td>
+        <td th:text="${group.dateOfFinish}"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+<!--</body>-->
+<!--</html>-->

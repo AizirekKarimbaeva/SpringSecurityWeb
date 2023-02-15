@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<table class="table">
+    <thead>
+    <tr >
+        <th scope="col">1</th>
+        <th scope="col">Group Name</th>
+        <th scope="col">Date of start</th>
+        <th scope="col">Date of finish</th>
+        <th scope="col">Students</th>
+        <th scope="col">Courses</th>
+        <th scope="col">Update</th>
+        <th scope="col" sec:authorize="hasAuthority('ADMIN')">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="group:${groups}">
+        <td th:field="${group.id}"></td>
+        <td th:text="${group.groupName}"></td>
+        <td th:text="${group.dateOfStart}"></td>
+        <td th:text="${group.dateOfFinish}"></td>
+        <td><a th:href="@{/groups/students/{id}(id=${group.id})}">Students</a> </td>
+        <td><a th:href="@{/groups/courses/{id}(id=${group.id})}">Courses</a></td>
+        <td><a th:href="@{/groups/update/{id}(id = ${group.id})}">Update</a></td>
+        <td sec:authorize="hasAuthority('ADMIN')">
+            <form th:method="DELETE" th:action="@{/groups/delete/{id}(id=${group.getId})}">
+                <input type="submit" value="delete"></form></td>
+    </tr>
+    </tbody>
+</table>
+<a href="/groups/addGroup" tabindex="0" class="btn btn-lg btn-danger" role="button" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-title="groups">add</a>
+<button type="button"><a href="/">Go back</a></button>
+<a th:href="/addGroup" sec:authorize="hasAuthority('ADMIN')">ADD GROUP</a>
+<a th:href="/updateGroup" sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')">UPDATE GROUP</a>
+</body>
+</html>

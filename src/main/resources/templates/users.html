@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+  <tbody>
+  <tr>
+  <th>Id</th>
+  <th>Username</th>
+
+  </tr>
+  <tr th:each="user:${users}">
+  <td th:text="${user.id}"></td>
+  <td th:text="${user.username}"></td>
+  </tr>
+  </tbody>
+  <a th:href="/saveUser" sec:authorize="hasAuthority('ADMIN')">ADD</a>
+</table>
+</body>
+</html>
